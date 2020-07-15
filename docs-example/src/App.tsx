@@ -10,6 +10,7 @@ import Summary from "./Summary";
 import { createStore } from "little-state-machine";
 
 const steps = ['Personal information', 'Attach documents', 'Review and submit'];
+const stepPaths = ['/', '/documents', '/summary'];
 
 export interface UserFormData {
   firstName: string,
@@ -33,9 +34,9 @@ createStore({
 export default function Registration() {
   const [activeStep, setActiveStep] = React.useState(0);
   
-  let {location} = useHistory();
+  let location = useLocation();
   React.useEffect(() => {
-    console.log(location.pathname);
+    setActiveStep(stepPaths.indexOf(location.pathname));
   }, [location]);
 
   return (
